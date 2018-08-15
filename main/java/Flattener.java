@@ -1,9 +1,7 @@
 import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Flattener
 {
@@ -20,9 +18,10 @@ public class Flattener
             Object e = anArray[i];
             if (e instanceof List)
             {
-                flatten((List)e);
-            }
-            else
+                List returnedList = flatten((List)e);
+                Collections.addAll(returnedList, answer);
+                //sendBackList(returnedList, answer);
+            } else if (e != null)
             {
                 answer.add(e);
             }
@@ -31,41 +30,17 @@ public class Flattener
         return answer;
     }
 
-       /**
-     * Cleans a list of null entries
-     * @param aList List
-     * @return List
-     */
-    public List cleanList(List aList, List answer)
+
+    public void sendBackList(List aList, List answer)
     {
-        int count = 0;
         for (Object e : aList)
         {
-            if (e == null)
+            if (e != null)
             {
-                aList.remove(count);
+                answer.add(e);
             }
-            count++;
         }
-
-        //alist.
-        return aList;
     }
-
-
-    public List sendBackList(List aList, List answer)
-    {
-
-        for (Object e : aList)
-        {
-
-        }
-
-
-        return null;
-    }
-
-
 }
 
 
