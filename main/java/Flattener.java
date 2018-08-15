@@ -10,21 +10,27 @@ public class Flattener
 
     public List flatten(List aList)
     {
+        Object[] anArray = aList.toArray();
         List answer = new ArrayList();
 
-        for (Object e : aList)
+
+        for (Object e : anArray)
         {
             if (e instanceof List)
             {
-                cleanList((List)e);
-            }
 
+                flatten((List)e);
+            }
+            else
+            {
+                answer.add(e);
+            }
         }
 
         return answer;
     }
 
-    /**
+       /**
      * Cleans a list of null entries
      * @param aList List
      * @return List
@@ -40,6 +46,8 @@ public class Flattener
             }
             count++;
         }
+
+        //alist.
         return aList;
     }
 
