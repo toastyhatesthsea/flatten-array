@@ -1,5 +1,6 @@
 import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +15,11 @@ public class Flattener
         List answer = new ArrayList();
 
 
-        for (Object e : anArray)
+        for (int i=0; i<anArray.length; i++)
         {
+            Object e = anArray[i];
             if (e instanceof List)
             {
-
                 flatten((List)e);
             }
             else
@@ -35,7 +36,7 @@ public class Flattener
      * @param aList List
      * @return List
      */
-    public List cleanList(List aList)
+    public List cleanList(List aList, List answer)
     {
         int count = 0;
         for (Object e : aList)
@@ -49,6 +50,19 @@ public class Flattener
 
         //alist.
         return aList;
+    }
+
+
+    public List sendBackList(List aList, List answer)
+    {
+
+        for (Object e : aList)
+        {
+
+        }
+
+
+        return null;
     }
 
 
@@ -66,7 +80,9 @@ class FlattenTesters
         aList.add(1);
         aList.add(null);
 
-        int[] numbers = {4, 5, 6, 7, 8};
+        ArrayList numbers = new ArrayList();
+
+
 
         aList.add(Arrays.asList(numbers));
 
